@@ -12,15 +12,14 @@ return [
     'truncate_tables' => true,
 
     'roles_structure' => [
-        'super-admin' => [
-            'users' => 'c,r,u,d',
-            'roles' => 'c,r,u,d',  // Roles && assign permission
-            'managers' => 'c,r,u,d',
-            'profile' => 'r,u',
+        'manager' => [
+
         ],
-        'admin' => [
-            'users' => 'r',
-            'profile' => 'r,u',
+        'technician' => [
+
+        ],
+        'client' => [
+
         ],
 
     ],

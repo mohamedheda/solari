@@ -47,8 +47,8 @@ class OtpService
             DB::commit();
             return $this->responseSuccess(message: __('messages.Your account has been verified successfully'));
         } catch (\Exception $e) {
-            return $e;
             DB::rollBack();
+//            return $e;
             return $this->responseFail(message: __('messages.Something went wrong'));
         }
     }

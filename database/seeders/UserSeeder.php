@@ -13,10 +13,29 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::query()->create([
-            'name' => 'User',
-            'email' => 'user@elryad.com',
-            'password' => 'elryad1256!#',
+        $manager = User::query()->create([
+            'name' => 'Manager',
+            'email' => 'manger@solari.com',
+            'password' => 'solari2025',
+            'phone' => fake()->phoneNumber,
+            'image' =>fake()->imageUrl(word: 'Manager')
         ]);
+        $manager->addRole('manager');
+        $technician = User::query()->create([
+            'name' => 'Technician',
+            'email' => 'technician@solari.com',
+            'password' => 'solari2025',
+            'phone' => fake()->phoneNumber,
+            'image' => fake()->imageUrl(word: 'Technician')
+        ]);
+        $technician->addRole('technician');
+        $client = User::query()->create([
+            'name' => 'Client',
+            'email' => 'client@solari.com',
+            'password' => 'solari2025',
+            'phone' => fake()->phoneNumber,
+            'image' => fake()->imageUrl(word: 'Client')
+        ]);
+        $client->addRole('client');
     }
 }
