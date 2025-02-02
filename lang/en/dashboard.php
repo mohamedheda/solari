@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'Elryad' => 'Elryad',
+    'Solari' => 'Solari',
     'Dashboard' => 'Dashboard',
     'Login' => 'Login',
     'Logout' => 'Logout',

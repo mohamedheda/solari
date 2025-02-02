@@ -24,7 +24,7 @@ class SettingsService
     {
         $data = $request->validated();
         if ($request->image !== null) {
-            $data['image'] = $this->fileManagerService->handle('image', 'profiles/members/images');
+            $data['image'] = $this->fileManagerService->upload('image', 'profiles/members/images');
         }
         update_model($this->settingRepository, $id, $data, '');
         return redirect()->back()->with(['success' => __('messages.updated_successfully')]);

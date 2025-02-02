@@ -29,6 +29,7 @@ class UserService
             $data = $request->validated();
 
             $user = $this->userRepository->create($data);
+            $user->addRole('manager');
             DB::commit();
             return redirect()->route('users.index', $user->id)->with(['success' => __('messages.created_successfully')]);
         } catch (\Exception $e) {
