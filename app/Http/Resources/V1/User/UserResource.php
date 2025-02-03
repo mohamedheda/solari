@@ -22,7 +22,7 @@ class UserResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'otp_token' => $this->whenNotNull($this->otp?->token),
-            'otp_verified' => (int) $this->whenNotNull($this->otp_verified),
+            'otp_verified' => (boolean) $this->whenNotNull($this->otp_verified),
             'token' => $this->when($this->withToken, $this->token()),
         ];
     }
