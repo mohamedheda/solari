@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('faults', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('cell_id')->nullable()->references('cells')
+            $table->foreignId('cell_id')->nullable()->constrained('cells')
                 ->cascadeOnUpdate()->nullOnDelete();
             $table->tinyInteger('value')->comment('0 --> 7');
             $table->timestamps();

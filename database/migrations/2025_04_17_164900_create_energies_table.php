@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('energies', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('cell_id')->nullable()->references('cells')
+            $table->foreignId('cell_id')->nullable()->constrained('cells')
                 ->cascadeOnUpdate()->nullOnDelete();
             $table->integer('energy')->default(0);
             $table->timestamps();

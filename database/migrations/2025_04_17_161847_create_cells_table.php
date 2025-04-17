@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('cells', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('system_id')->nullable()->references('systems')
+            $table->foreignId('system_id')->nullable()->constrained('systems')
                 ->cascadeOnUpdate()->nullOnDelete();
             $table->string('name')->nullable();
             $table->string('cell_id')->unique()->nullable();

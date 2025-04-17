@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('system_id')->unique()->nullable();
             $table->string('location')->nullable();
-            $table->foreignId('user_id')->nullable()->references('users')
+            $table->foreignId('user_id')->nullable()->constrained('users')
                 ->cascadeOnUpdate()->nullOnDelete();
             $table->boolean('tracking_system_working')->default(1);
             $table->tinyInteger('water_level')->default(0);
