@@ -4,6 +4,8 @@ use App\Http\Controllers\Api\V1\Auth\AuthController;
 use App\Http\Controllers\Api\V1\Auth\Email\ChangeEmailController;
 use App\Http\Controllers\Api\V1\Auth\Otp\OtpController;
 use App\Http\Controllers\Api\V1\Auth\Password\PasswordController;
+use App\Http\Controllers\Api\V1\System\SystemController;
+use App\Http\Controllers\Api\V1\User\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'auth', 'controller' => AuthController::class], function () {
@@ -27,4 +29,17 @@ Route::group(['prefix' => 'password'], function () {
     Route::post('/verify-otp', [PasswordController::class, 'verifyOtp']);
     Route::post('/reset', [PasswordController::class, 'reset']);
     Route::post('/update', [PasswordController::class, 'updatePassword']);
+});
+Route::group(['prefix' => 'technician', 'middleware' => ['auth:api']], function () {
+    Route::post('/', [UserController::class, 'store']);
+    Route::get('/', [UserController::class, 'index']);
+});
+Route::group(['prefix' => 'system', 'middleware' => ['auth:api']], function () {
+    Route::put('/{id}', [SystemController::class, 'update']);
+    Route::post('/', [SystemController::class, 'store']);
+    Route::get('/', [SystemController::class, 'index']);
+    Route::get('/{id}', [SystemController::class, 'show']);
+    Route::post('/cell', [SystemController::class, 'storeCell']);
+    Route::get('/cell/{id}', [SystemController::class, 'getCell']);
+    Route::get('/cell/{id}/faults', [SystemController::class, 'getCellFaults']);
 });

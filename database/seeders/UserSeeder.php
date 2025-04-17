@@ -23,6 +23,7 @@ class UserSeeder extends Seeder
         $manager->addRole('manager');
         $technician = User::query()->create([
             'name' => 'Technician',
+            'parent_id' => $manager->id ,
             'email' => 'technician@solari.com',
             'password' => 'solari2025',
             'phone' => fake()->phoneNumber,
@@ -31,6 +32,7 @@ class UserSeeder extends Seeder
         $technician->addRole('technician');
         $client = User::query()->create([
             'name' => 'Client',
+            'parent_id' => $manager->id ,
             'email' => 'client@solari.com',
             'password' => 'solari2025',
             'phone' => fake()->phoneNumber,
@@ -47,6 +49,7 @@ class UserSeeder extends Seeder
         $manager->addRole('manager');
         $technician = User::query()->create([
             'name' => 'Technician',
+            'parent_id' => $manager->id ,
             'email' => 'technician1@solari.com',
             'password' => 'solari2025',
             'phone' => fake()->phoneNumber,
@@ -55,6 +58,7 @@ class UserSeeder extends Seeder
         $technician->addRole('technician');
         $client = User::query()->create([
             'name' => 'Client',
+            'parent_id' => $manager->id ,
             'email' => 'client1@solari.com',
             'password' => 'solari2025',
             'phone' => fake()->phoneNumber,
@@ -63,6 +67,7 @@ class UserSeeder extends Seeder
         $client->addRole('client');
         $manager = User::query()->create([
             'name' => 'Manager',
+            'parent_id' => $manager->id ,
             'email' => 'manger2@solari.com',
             'password' => 'solari2025',
             'phone' => fake()->phoneNumber,
@@ -71,6 +76,7 @@ class UserSeeder extends Seeder
         $manager->addRole('manager');
         $technician = User::query()->create([
             'name' => 'Technician',
+            'parent_id' => $manager->id ,
             'email' => 'technician2@solari.com',
             'password' => 'solari2025',
             'phone' => fake()->phoneNumber,
@@ -79,6 +85,7 @@ class UserSeeder extends Seeder
         $technician->addRole('technician');
         $client = User::query()->create([
             'name' => 'Client',
+            'parent_id' => $manager->id ,
             'email' => 'client2@solari.com',
             'password' => 'solari2025',
             'phone' => fake()->phoneNumber,

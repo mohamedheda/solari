@@ -102,6 +102,7 @@ class AuthController extends Controller
 
 ```
 **AuthService**
+
 ```php
 <?php
 
@@ -109,7 +110,7 @@ namespace App\Http\Services\Api\V1\Auth;
 
 use App\Http\Requests\Api\V1\Auth\SignInRequest;
 use App\Http\Requests\Api\V1\Auth\SignUpRequest;
-use App\Http\Resources\V1\User\UserResource;
+use App\Http\Resources\V1\User\SystemResource;
 use App\Http\Traits\Responser;
 use App\Repository\UserRepositoryInterface;
 use Exception;
@@ -133,7 +134,7 @@ abstract class AuthService
             $user = $this->userRepository->create($data);
 
             DB::commit();
-            return $this->responseSuccess(message: __('messages.created successfully'), data: new UserResource($user, false));
+            return $this->responseSuccess(message: __('messages.created successfully'), data: new SystemResource($user, false));
         } catch (Exception $e) {
             DB::rollBack();
 //            dd($e);
@@ -145,7 +146,7 @@ abstract class AuthService
         $credentials = $request->only('email', 'password');
         $token = auth('api')->attempt($credentials);
         if ($token) {
-            return $this->responseSuccess(message: __('messages.Successfully authenticated'), data: new UserResource(auth('api')->user(), true));
+            return $this->responseSuccess(message: __('messages.Successfully authenticated'), data: new SystemResource(auth('api')->user(), true));
         }
 
         return $this->responseFail(status: 401, message: __('messages.wrong credentials'));
@@ -576,7 +577,7 @@ class GetService
 
 namespace App\Http\Services\Api\V1\Auth;
 
-use App\Http\Resources\V1\User\UserResource;
+use App\Http\Resources\V1\User\SystemResource;
 use App\Http\Services\Mutual\GetService;
 use App\Repository\UserRepositoryInterface;
 
@@ -591,7 +592,7 @@ abstract class AuthService
     
     public function getAllUsers()
     {
-        return $this->get->handle(UserResource::class, $this->userRepository, 'getAll')
+        return $this->get->handle(SystemResource::class, $this->userRepository, 'getAll')
     }
 }
 ```

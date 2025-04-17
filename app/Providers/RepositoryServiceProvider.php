@@ -8,6 +8,7 @@ use App\Repository\Eloquent\PermissionRepository;
 use App\Repository\Eloquent\Repository;
 use App\Repository\Eloquent\RoleRepository;
 use App\Repository\Eloquent\SettingsRepository;
+use App\Repository\Eloquent\SystemRepository;
 use App\Repository\Eloquent\UserRepository;
 use App\Repository\ManagerRepositoryInterface;
 use App\Repository\OtpRepositoryInterface;
@@ -15,6 +16,7 @@ use App\Repository\PermissionRepositoryInterface;
 use App\Repository\RepositoryInterface;
 use App\Repository\RoleRepositoryInterface;
 use App\Repository\SettingsRepositoryInterface;
+use App\Repository\SystemRepositoryInterface;
 use App\Repository\UserRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
@@ -34,6 +36,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(PermissionRepositoryInterface::class, PermissionRepository::class);
         $this->app->singleton(ManagerRepositoryInterface::class, ManagerRepository::class);
         $this->app->singleton(OtpRepositoryInterface::class, OtpRepository::class);
+        $this->app->singleton(SystemRepositoryInterface::class, SystemRepository::class);
 
     }
 

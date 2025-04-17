@@ -70,4 +70,10 @@ class User extends Authenticatable implements JWTSubject , LaratrustUser
     public function otps(){
         return $this->hasMany(Otp::class);
     }
+    public function technicians(){
+        return $this->hasMany(User::class,'parent_id');
+    }
+    public function systems(){
+        return $this->hasManyThrough(System::class,User::class,'parent_id','user_id');
+    }
 }
