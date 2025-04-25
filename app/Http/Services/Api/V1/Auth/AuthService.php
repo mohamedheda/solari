@@ -51,6 +51,8 @@ abstract class AuthService extends PlatformService
                 $this->otpService->generate(auth('api')->user());
                 auth('api')->user()?->load('otp');
             }
+            if (auth('api')->user()?->fcm != $request->fcm)
+                auth('api')->user()?->update(['fcm' => $request->fcm]);
             return $this->responseSuccess(message: __('messages.Successfully authenticated'), data: new UserResource(auth('api')->user(), true));
         }
 

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->boolean('is_active')->default(1);
             $table->boolean('otp_verified')->default(0);
             $table->string('image')->nullable();
+            $table->string('fcm')->nullable();
             $table->timestamps();
         });
     }

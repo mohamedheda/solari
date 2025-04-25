@@ -24,6 +24,7 @@ class SignInRequest extends FormRequest
         return [
             'email' => 'required',
             'password' => 'required',
+            'fcm' => 'required|string',
         ];
     }
 }

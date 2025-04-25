@@ -43,8 +43,6 @@ class SystemSeeder extends Seeder
         for ($i = 0; $i < 24; $i++) {
             $cell->energies()->create([
                 'energy' => rand(10, 100),
-                'created_at' => $baseTime->copy()->addHours($i),
-                'updated_at' => $baseTime->copy()->addHours($i),
             ]);
         }
 
@@ -53,7 +51,6 @@ class SystemSeeder extends Seeder
         for ($i = 0; $i < $faultCount; $i++) {
             $cell->faults()->create([
                 'value' => rand(0, 7),
-                'created_at' => now()->subHours(rand(1, 72)),
             ]);
         }
     }
