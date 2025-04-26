@@ -14,7 +14,7 @@ trait FirebaseTrait
         {
 
 //        $credentialsFilePath = base_path('public\json\solari-app-firebase-adminsdk-fbsvc-40bf035281.json');
-            $credentialsFilePath = Http::get(asset('json/solari-app-firebase-adminsdk-fbsvc-40bf035281.json'));
+            $credentialsFilePath = json_decode(config('app.GOOGLE_APPLICATION_CREDENTIALS_JSON'));
             $client = new GoogleClient();
             try {
                 $client->setAuthConfig($credentialsFilePath);

@@ -188,5 +188,5 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
-
+    'GOOGLE_APPLICATION_CREDENTIALS_JSON' => env('GOOGLE_APPLICATION_CREDENTIALS_JSON',null) ,
 ];
