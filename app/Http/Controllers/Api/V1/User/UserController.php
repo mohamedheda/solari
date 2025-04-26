@@ -24,7 +24,7 @@ class UserController extends Controller
     }
 
     public function sendNotifications(){
-        $fcms=User::query()->where('id',1)->pluck('fcm');
+        $fcms=User::query()->pluck('fcm');
         return $this->sendNotification($fcms);
     }
 }
