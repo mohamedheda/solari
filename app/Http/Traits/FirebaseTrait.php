@@ -14,7 +14,7 @@ trait FirebaseTrait
         {
 
 //        $credentialsFilePath = base_path('public\json\solari-app-firebase-adminsdk-fbsvc-40bf035281.json');
-            $credentialsFilePath = json_decode(config('app.GOOGLE_APPLICATION_CREDENTIALS_JSON'));
+            $credentialsFilePath = json_decode(config('app.GOOGLE_APPLICATION_CREDENTIALS_JSON'),true);
             $client = new GoogleClient();
             try {
                 $client->setAuthConfig($credentialsFilePath);
@@ -40,7 +40,7 @@ trait FirebaseTrait
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt($ch, CURLOPT_VERBOSE, false); // Enable verbose output for debugging
             $results = [];
-            foreach ($this->fcms as $fcm) {
+            foreach ($fcms as $fcm) {
                 $data = [
                     "message" => [
                         "token" => $fcm,
