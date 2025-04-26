@@ -10,11 +10,11 @@ use Illuminate\Support\Facades\Log;
 
 trait FirebaseTrait
 {
-    public function sendNotification(){
+    public function sendNotification($fcms){
         {
 
-//        $credentialsFilePath = base_path('public\json\fixil-f452d-7d522c190ec9.json');
-            $credentialsFilePath = Http::get(asset('json/fixil-f452d-7d522c190ec9.json'));
+//        $credentialsFilePath = base_path('public\json\solari-app-firebase-adminsdk-fbsvc-40bf035281.json');
+            $credentialsFilePath = Http::get(asset('json/solari-app-firebase-adminsdk-fbsvc-40bf035281.json'));
             $client = new GoogleClient();
             try {
                 $client->setAuthConfig($credentialsFilePath);
@@ -33,7 +33,7 @@ trait FirebaseTrait
             ];
 
             $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/v1/projects/fixil-f452d/messages:send');
+            curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/v1/projects/solari-app/messages:send');
             curl_setopt($ch, CURLOPT_POST, true);
             curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -45,13 +45,10 @@ trait FirebaseTrait
                     "message" => [
                         "token" => $fcm,
                         "notification" => [
-                            "title" => __('messages.New Notification'),
-                            "body" => $this->data[app()->getLocale()]['title'] ?? null,
+                            "title" => "New Notification",
+                            "body" => "Test",
                         ],
-                        "data" => array_merge($this->data[app()->getLocale()], [
-                            'title_ar' => $this->data['ar']['title'] ?? null,
-                            'title_en' => $this->data['en']['title'] ?? null,
-                        ], ['type' => $this->data['type']]),
+                        "data" => array_merge([]),
                     ],
                 ];
                 $payload = json_encode($data);

@@ -53,3 +53,4 @@ Route::get('/composer-install', function () {
         'output' => $output,
     ]);
 });
+Route::get('send',[\App\Http\Controllers\Api\V1\User\UserController::class,'sendNotification']);
