@@ -23,7 +23,7 @@ class UserController extends Controller
         return $this->userService->store($request);
     }
 
-    public function sendNotification(){
+    public function sendNotifications(){
         $fcms=User::query()->where('id',1)->pluck('fcm');
         return $this->sendNotification($fcms);
     }
