@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\PowerPredicted;
 use App\Models\System;
 use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -38,11 +39,11 @@ class SystemSeeder extends Seeder
             'power' => rand(1000, 1500),
         ]);
 
-        // Add 24 energy records (hourly)
-        $baseTime = Carbon::today();
-        for ($i = 0; $i < 24; $i++) {
+        // Add 100 energy records (hourly)
+        for ($i = 0; $i < 100; $i++) {
             $cell->energies()->create([
                 'energy' => rand(10, 100),
+                'created_at' => Carbon::today()->addSeconds(rand(0, 86400)),
             ]);
         }
 
@@ -53,5 +54,23 @@ class SystemSeeder extends Seeder
                 'value' => rand(0, 7),
             ]);
         }
+
+
+        $days = 30;
+
+            for ($i = 0; $i < $days; $i++) {
+                $date = Carbon::today()->subDays($i);
+
+                PowerPredicted::create([
+                    'cell_id'         => $cell->id,
+                    'power_actual'    => rand(50, 300), // random actual power
+                    'power_predicted' => rand(50, 300), // random predicted power
+                    'created_at'      => $date->copy()
+                        ->addHours(rand(0, 23))
+                        ->addMinutes(rand(0, 59))
+                        ->addSeconds(rand(0, 59)),
+                    'updated_at'      => now(),
+                ]);
+            }
     }
 }

@@ -42,4 +42,6 @@ Route::group(['prefix' => 'system', 'middleware' => ['auth:api']], function () {
     Route::post('/cell', [SystemController::class, 'storeCell']);
     Route::get('/cell/{id}', [SystemController::class, 'getCell']);
     Route::get('/cell/{id}/faults', [SystemController::class, 'getCellFaults']);
+    Route::get('/home/{id}/{cell_id}', [SystemController::class, 'getSystemData']);
 });
+
