@@ -13,8 +13,9 @@ trait FirebaseTrait
     public function sendNotification($fcms){
         {
 
-//        $credentialsFilePath = base_path('public\json\solari-app-firebase-adminsdk-fbsvc-40bf035281.json');
-        $credentialsFilePath = Http::get(asset('solari-app-firebase-adminsdk-fbsvc-40bf035281.json'));
+//        $credentialsFilePath = base_path('public\json\solari-app-943cca579a98.json');
+        $credentialsFilePath = Http::get(asset('/solari-app-943cca579a98.json'));
+//        dd($credentialsFilePath);
             $client = new GoogleClient();
             try {
                 $client->setAuthConfig($credentialsFilePath);
