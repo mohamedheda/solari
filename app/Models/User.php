@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -22,6 +23,7 @@ class User extends Authenticatable implements JWTSubject , LaratrustUser
      */
     protected $fillable = [
         'name',
+        'last_name',
         'image',
         'email',
         'password',
@@ -64,7 +66,13 @@ class User extends Authenticatable implements JWTSubject , LaratrustUser
         return JWTAuth::fromUser($this);
     }
 
-
+    public function imageUrl():Attribute{
+        return  Attribute::get(function (){
+            if($this->image)
+                return url($this->image);
+            return "https://placehold.co/600x400?text=".$this->name;
+        });
+    }
     public function otp(){
         return $this->hasOne(Otp::class);
     }

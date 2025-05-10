@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\System\CellRequest;
 use App\Http\Requests\Api\V1\System\SystemRequest;
 use App\Http\Resources\V1\System\CellDetailsResource;
+use App\Http\Resources\V1\System\CellGeneralResource;
+use App\Http\Resources\V1\System\CellResource;
 use App\Http\Resources\V1\System\EnergyDayResource;
 use App\Http\Resources\V1\System\FaultResource;
 use App\Http\Resources\V1\System\SystemGeneralResource;
@@ -32,7 +34,7 @@ class SystemController extends Controller
     public function getSystemData($id, $cell_id)
     {
         $systemId = $id;
-        $energiesPerHour=$this->getEnergyChartData($systemId);
+        $energiesPerHour = $this->getEnergyChartData($systemId);
         $powerChartData = $this->getPowerChartData($cell_id);
         $totalEnergyToday = $this->getTotalEnergyToday();
         $totalEnergyYesterday = $this->getTotalEnergyYesterday();
@@ -44,6 +46,22 @@ class SystemController extends Controller
             'power_chart' => $powerChartData
         ];
         return $this->responseSuccess(data: $response);
+    }
+
+    public function getSystemHomeData($id)
+    {
+
+        $system = System::query()->where('id', $id)->with(['cells', 'powerPredictsToday'])->first();
+        if(!$system)
+            return $this->responseCustom(404,"NOT FOUND");
+        $data = [
+            'total_power' => $system->cells()?->sum('power') . " kw",
+            'total_daily_generation' => $system->totalDailygeneration,
+            'cells' => CellGeneralResource::collection($system->cells),
+            'temperature' => $system->temperature,
+            'system_temperature_label' => $system->system_temperature_label,
+        ];
+        return $this->responseSuccess(data: $data);
     }
 
     private function getEnergyChartData($systemId)

@@ -24,6 +24,10 @@ Route::group(['prefix' => 'email', 'middleware' => ['auth:api']], function () {
     Route::post('/change', [ChangeEmailController::class, 'sendOtp']);
     Route::post('/otp/verify', [ChangeEmailController::class, 'change']);
 });
+Route::group(['prefix' => 'profile', 'middleware' => ['auth:api']], function () {
+    Route::get('/', [UserController::class, 'getProfile']);
+    Route::post('/', [UserController::class, 'updateProfile']);
+});
 Route::group(['prefix' => 'password'], function () {
     Route::post('/forgot', [PasswordController::class, 'forgot']);
     Route::post('/verify-otp', [PasswordController::class, 'verifyOtp']);
@@ -42,6 +46,7 @@ Route::group(['prefix' => 'system', 'middleware' => ['auth:api']], function () {
     Route::post('/cell', [SystemController::class, 'storeCell']);
     Route::get('/cell/{id}', [SystemController::class, 'getCell']);
     Route::get('/cell/{id}/faults', [SystemController::class, 'getCellFaults']);
+    Route::get('/home/{id}', [SystemController::class, 'getSystemHomeData']);
     Route::get('/home/{id}/{cell_id}', [SystemController::class, 'getSystemData']);
 });
 

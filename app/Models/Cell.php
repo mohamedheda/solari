@@ -37,6 +37,12 @@ class Cell extends Model
     public function faults(){
         return $this->hasMany(Fault::class);
     }
+    public function powerPredicts(){
+        return $this->hasMany(PowerPredicted::class);
+    }
+    public function powerPredictsToday(){
+        return $this->hasMany(PowerPredicted::class)->whereDate('created_at','=', Carbon::now()->format('Y-m-d'));
+    }
     public function latestFaults(){
         return $this->faults()->whereNot('value',0)->latest()->limit(5);
     }
