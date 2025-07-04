@@ -53,6 +53,7 @@ abstract class AuthService extends PlatformService
             }
             if (auth('api')->user()?->fcm != $request->fcm)
                 auth('api')->user()?->update(['fcm' => $request->fcm]);
+            auth('api')->user()->load('roles');
             return $this->responseSuccess(message: __('messages.Successfully authenticated'), data: new UserResource(auth('api')->user(), true));
         }
 

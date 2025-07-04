@@ -26,6 +26,9 @@ class CellRequest extends FormRequest
             'name' => ['required', 'string' ,'max:255'],
             'system_id' => ['required', Rule::exists('systems','id')],
             'cell_id' => ['required',Rule::unique('cells','cell_id')],
+            'max_capacity' => ['required', 'numeric' ],
+            'lat' => ['required', 'numeric' ],
+            'long' => ['required', 'numeric' ],
         ];
     }
 }

@@ -22,6 +22,7 @@ class CellDetailsResource extends JsonResource
             'current' => $this->current ,
             'voltage' => $this->voltage ,
             'power' => $this->power ,
+            'is_cleaning' => $this->system?->cleaning ,
             'today_energy' => $this->today_energy ,
             'faults' => FaultResource::collection($this->latestFaults),
             'water_level' => $this->system?->water_level ,
