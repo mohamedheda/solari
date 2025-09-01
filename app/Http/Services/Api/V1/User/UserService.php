@@ -50,6 +50,7 @@ class UserService
         try {
             $data = $request->validated();
             $user = $this->userRepository->create($data);
+            $user->addRole('technician');
             DB::commit();
             return $this->responseSuccess(message: __('messages.created successfully'), data: new UserResource($user, false));
         } catch (\Exception $e) {
